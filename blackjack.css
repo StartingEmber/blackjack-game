@@ -33,6 +33,9 @@ button:hover {
 }
 #dealer-cards img:hover,
 #your-cards img:hover {
+    height: 175px;
+    width: 125px;
+    margin: 1px;
     transform: rotate(-2deg) scale(1.02);
 }
 

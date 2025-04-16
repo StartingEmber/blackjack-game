@@ -1,66 +1,43 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Trebuchet MS', sans-serif;
+    background: radial-gradient(circle, #000000, #1a1a1a);
+    color: #f8f8f8;
     text-align: center;
-    background-color: #2c3e50;
-    color: white;
-}
-
-#dealer-cards img {
-    height: 175px;
-    width: 125px;
-    margin: 1px;
-}
-
-#your-cards img {
-    height: 175px;
-    width: 125px;
-    margin: 1px;
-}
-
-#hit, #stay, #place-bet, #new-round {
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-}
-
-#hit, #stay, #new-round {
-    background-color: #3498db;
-}
-
-#place-bet {
-    background-color: #2ecc71;
-}
-
-#hit:hover, #stay:hover, #new-round:hover {
-    background-color: #2980b9;
-}
-
-#place-bet:hover {
-    background-color: #27ae60;
-}
-
-#bet-amount {
-    width: 80px;
-    height: 30px;
-    font-size: 18px;
-    text-align: center;
-}
-
-#results {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-    color: #f1c40f;
+    color: #ffd700;
+    font-size: 3em;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
 }
 
-h3 {
-    margin: 20px;
+.login-container, #game-container {
+    animation: fadeIn 1s ease-in;
 }
+
+button {
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ffcc;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+#dealer-cards img,
+#your-cards img {
+    transition: transform 0.3s ease;
+}
+#dealer-cards img:hover,
+#your-cards img:hover {
+    transform: rotate(-2deg) scale(1.02);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+

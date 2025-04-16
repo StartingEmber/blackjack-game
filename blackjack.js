@@ -145,12 +145,15 @@ function startGame() {
     }
 
     for (let i = 0; i < 2; i++) {
-        let cardImg = document.createElement("img");
-        let card = deck.pop();
-        cardImg.src = "./cards/" + card + ".png";
-        yourSum += getValue(card);
-        yourAceCount += checkAce(card);
-        document.getElementById("your-cards").append(cardImg);
+    let card = deck.pop();
+    let cardImg = createCardElement(card);
+    yourSum += getValue(card);
+    yourAceCount += checkAce(card);
+    document.getElementById("your-cards").append(cardImg);
+
+    //temporary debug window
+    console.log("Dealt card:", card, "to player");
+    console.log("Your cards element:", document.getElementById("your-cards"));
     }
 
     document.getElementById("hit").addEventListener("click", hit);

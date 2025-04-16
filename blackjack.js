@@ -135,25 +135,30 @@ function startGame() {
     hidden = deck.pop();
     dealerSum += getValue(hidden);
     dealerAceCount += checkAce(hidden);
-    //modified how the cards looked when being presented
+    
     while (dealerSum < 17) {
-        let cardImg = createCardElement(card);
+        let cardImg = document.createElement("img");
         let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png";
+        cardImg.className = "playing-card";
+        cardImg.style.animation = "flipInY 0.5s ease-out forwards";
         dealerSum += getValue(card);
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
     }
 
     for (let i = 0; i < 2; i++) {
-    let card = deck.pop();
-    let cardImg = createCardElement(card);
-    yourSum += getValue(card);
-    yourAceCount += checkAce(card);
-    document.getElementById("your-cards").append(cardImg);
-
-    //temporary debug window
-    console.log("Dealt card:", card, "to player");
-    console.log("Your cards element:", document.getElementById("your-cards"));
+        let cardImg = document.createElement("img");
+        let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png";
+        cardImg.className = "playing-card";
+        cardImg.style.animation = "flipInY 0.5s ease-out forwards";
+        yourSum += getValue(card);
+        yourAceCount += checkAce(card);
+        document.getElementById("your-cards").append(cardImg);
+        
+        // Debugging
+        console.log("Dealt player card:", card, "at path:", cardImg.src);
     }
 
     document.getElementById("hit").addEventListener("click", hit);
@@ -164,12 +169,17 @@ function hit() {
     if (!canHit) {
         return;
     }
-    //easier implementation and looking card animation when played
+
+    let cardImg = document.createElement("img");
     let card = deck.pop();
-    let cardImg = createCardElement(card);
+    cardImg.src = "./cards/" + card + ".png";
+    cardImg.className = "playing-card";
+    cardImg.style.animation = "flipInY 0.5s ease-out forwards";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
+    
+    console.log("Hit card:", card, "at path:", cardImg.src);
 
     if (reduceAce(yourSum, yourAceCount) > 21) {
         canHit = false;

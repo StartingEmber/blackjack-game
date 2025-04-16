@@ -1,17 +1,27 @@
 //login system added when clicking start
-document.getElementById("login-btn").addEventListener("click", function() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    
-    if (username && password) {
-        document.getElementById("login-screen").style.display = "none";
-        document.getElementById("game-container").style.display = "block";
-        document.getElementById("player-name").textContent = username;
-    } else {
-        alert("Please enter both username and password!");
-    }
-});
+function initializeLogin() {
+    document.getElementById("login-btn").addEventListener("click", function() {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        
+        if (username && password) {
+            document.getElementById("login-screen").style.display = "none";
+            document.getElementById("game-container").style.display = "block";
+            document.getElementById("player-name").textContent = username;
+            
+            // Initialize game after login
+            document.getElementById("place-bet").addEventListener("click", placeBet);
+            document.getElementById("new-round").addEventListener("click", newRound);
+        } else {
+            alert("Please enter both username and password!");
+        }
+    });
+}
 
+// Initialize when DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    initializeLogin();
+});
 
 
 let dealerSum = 0;
@@ -44,10 +54,10 @@ function createCardElement(card, isHidden = false) {
     }
     return cardImg;
 }
-
+//commenting out redundent code to see if it helps
 window.onload = function() {
-    document.getElementById("place-bet").addEventListener("click", placeBet);
-    document.getElementById("new-round").addEventListener("click", newRound);
+    //document.getElementById("place-bet").addEventListener("click", placeBet);
+    //document.getElementById("new-round").addEventListener("click", newRound);
 }
 
 function placeBet() {

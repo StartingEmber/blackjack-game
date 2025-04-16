@@ -29,13 +29,13 @@ button:hover {
 
 #dealer-cards img,
 #your-cards img {
+     height: 175px;
+    width: 125px;
+    margin: 1px;
     transition: transform 0.3s ease;
 }
 #dealer-cards img:hover,
 #your-cards img:hover {
-    height: 175px;
-    width: 125px;
-    margin: 1px;
     transform: rotate(-2deg) scale(1.02);
 }
 

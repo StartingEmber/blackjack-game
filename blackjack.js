@@ -165,8 +165,8 @@ function hit() {
         return;
     }
     //easier implementation and looking card animation when played
-    let cardImg = createCardElement(card);
     let card = deck.pop();
+    let cardImg = createCardElement(card);
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);

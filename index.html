@@ -1,63 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dominoes(Totally Real) Black Jack Casino</title>
-    <link rel="stylesheet" href="blackjack.css">
-</head>
-<body>
-    <div id="login-screen" class="login-container">
-        <h1>Welcome to Dominoes Casino</h1>
-        <div class="login-form">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button id="login-btn">Login</button>
-        </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dominoes(Totally Real) Black Jack Casino</title>
+        <link rel="stylesheet" href="blackjack.css">
+        <script src="blackjack.js"></script>
+    </head>
+
+    <body>
+        <div id="login-screen" class="login-container">
+    <h1>Welcome to Dominoes Casino</h1>
+    <div class="login-form">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-btn">Login</button>
     </div>
+</div>
 
-    <div id="game-container" style="display:none;">
-        <div class="casino-table">
-            <div class="dealer-area">
-                <div class="dealer-avatar"></div>
-                <h2>Dealer: <span id="dealer-sum"></span></h2>
-                <div id="dealer-cards" class="cards-area">
-                    <img id="hidden" src="./cards/BACK.png">
-                </div>
-            </div>
-
-            <div class="player-area">
-                <h1>Dominoes Blackjack</h1>
-                <h3>Welcome, <span id="player-name"></span> | Bank: $<span id="bank">1000</span></h3>
-                
-                <div id="betting-section">
-                    <h3>Place your bet:</h3>
-                    <input type="number" id="bet-amount" min="10" max="1000" value="50">
-                    <button id="place-bet">Place Bet</button>
-                </div>
-
-                <div id="game-section" style="display: none;">
-                    <div id="your-cards" class="cards-area"></div>
-                    <h2>You: <span id="your-sum"></span></h2>
-                    
-                    <div class="game-controls">
-                        <button id="hit">Hit</button>
-                        <button id="stay">Stay</button>
-                    </div>
-                    <p id="results"></p>
-                    <button id="new-round" style="display: none;">New Round</button>
-                </div>
-            </div>
-
-            <div class="casino-chips">
-                <div class="chip red"></div>
-                <div class="chip blue"></div>
-                <div class="chip green"></div>
-                <div class="chip black"></div>
-            </div>
+        <h3>Bank: $<span id="bank">1000</span></h3>
+        
+        <div id="betting-section">
+            <h3>Place your bet:</h3>
+            <input type="number" id="bet-amount" min="10" max="1000" value="50">
+            <button id="place-bet">Place Bet</button>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="blackjack.js"></script>
-</body>
+
+        <div id="game-section" style="display: none;">
+            <h2>Dealer: <span id="dealer-sum"></span></h2>
+            <div id="dealer-cards">
+                <img id="hidden" src="./cards/BACK.png">
+            </div>
+
+            <h2>You: <span id="your-sum"></span></h2>
+            <div id="your-cards"></div>
+
+            <br>
+            <button id="hit">Hit</button>
+            <button id="stay">Stay</button>
+            <p id="results"></p>
+            <button id="new-round" style="display: none;">New Round</button>
+        </div>
+    </body>
 </html>
+

@@ -1,3 +1,19 @@
+//login system added when clicking start
+document.getElementById("login-btn").addEventListener("click", function() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    
+    if (username && password) {
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("game-container").style.display = "block";
+        document.getElementById("player-name").textContent = username;
+    } else {
+        alert("Please enter both username and password!");
+    }
+});
+
+
+
 let dealerSum = 0;
 let yourSum = 0;
 let dealerAceCount = 0;
@@ -7,6 +23,27 @@ let deck;
 let canHit = true;
 let bank = 1000;
 let currentBet = 0;
+
+//added confetti because we love gambling!
+function triggerConfetti() {
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff']
+    });
+}
+
+//card animation to make it look nice, we want people to have dopamine rush
+function createCardElement(card, isHidden = false) {
+    let cardImg = document.createElement("img");
+    cardImg.src = "./cards/" + (isHidden ? "BACK.png" : card + ".png");
+    cardImg.className = "playing-card";
+    if (!isHidden) {
+        cardImg.style.animation = "flipInY 0.5s ease-out forwards";
+    }
+    return cardImg;
+}
 
 window.onload = function() {
     document.getElementById("place-bet").addEventListener("click", placeBet);
@@ -88,11 +125,10 @@ function startGame() {
     hidden = deck.pop();
     dealerSum += getValue(hidden);
     dealerAceCount += checkAce(hidden);
-    
+    //modified how the cards looked when being presented
     while (dealerSum < 17) {
-        let cardImg = document.createElement("img");
+        let cardImg = createCardElement(card);
         let card = deck.pop();
-        cardImg.src = "./cards/" + card + ".png";
         dealerSum += getValue(card);
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
@@ -115,10 +151,9 @@ function hit() {
     if (!canHit) {
         return;
     }
-
-    let cardImg = document.createElement("img");
+    //easier implementation and looking card animation when played
+    let cardImg = createCardElement(card);
     let card = deck.pop();
-    cardImg.src = "./cards/" + card + ".png";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
@@ -143,19 +178,23 @@ function stay() {
     if (yourSum > 21) {
         message = "You Bust! Lose $" + currentBet;
     }
+        //also triggers confetti because you WIN
     else if (dealerSum > 21) {
         winnings = currentBet * 2;
         bank += winnings;
         message = "Dealer Busts! You win $" + winnings;
+        triggerConfetti();
     }
     else if (yourSum == dealerSum) {
         bank += currentBet;
         message = "Tie! You get your $" + currentBet + " back";
     }
+    //this else if statment triggers confetti now that when you win for extra dopamine
     else if (yourSum > dealerSum) {
         winnings = currentBet * 2;
         bank += winnings;
         message = "You Win $" + winnings + "!";
+        triggerConfetti();
     }
     else if (yourSum < dealerSum) {
         message = "You Lose $" + currentBet;

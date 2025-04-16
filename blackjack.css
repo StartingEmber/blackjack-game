@@ -83,12 +83,25 @@ body {
     align-items: center;
 }
 
-#dealer-cards img, #your-cards img {
+#your-cards, #dealer-cards {
+    min-height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.playing-card {
     height: 150px;
-    width: 107px;
-    margin: 5px;
-    transition: all 0.5s ease;
-    transform-style: preserve-3d;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.playing-card:hover {
+    transform: translateY(-5px);
 }
 
 #dealer-cards img:not(#hidden), #your-cards img {
@@ -196,14 +209,4 @@ h2, h3 {
     border-radius: 5px;
     border: none;
     margin-right: 10px;
-}
-.player-area {
-    padding-bottom: 100px;
-     z-index: 2; 
-    padding-bottom: 80px; 
-}
-#your-cards {
-    min-height: 180px;
-    position: relative;
-    z-index: 2;
 }

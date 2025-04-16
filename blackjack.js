@@ -1,29 +1,3 @@
-//login system added when clicking start
-function initializeLogin() {
-    document.getElementById("login-btn").addEventListener("click", function() {
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-        
-        if (username && password) {
-            document.getElementById("login-screen").style.display = "none";
-            document.getElementById("game-container").style.display = "block";
-            document.getElementById("player-name").textContent = username;
-            
-            // Initialize game after login
-            document.getElementById("place-bet").addEventListener("click", placeBet);
-            document.getElementById("new-round").addEventListener("click", newRound);
-        } else {
-            alert("Please enter both username and password!");
-        }
-    });
-}
-
-// Initialize when DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
-    initializeLogin();
-});
-
-
 let dealerSum = 0;
 let yourSum = 0;
 let dealerAceCount = 0;
@@ -34,30 +8,9 @@ let canHit = true;
 let bank = 1000;
 let currentBet = 0;
 
-//added confetti because we love gambling!
-function triggerConfetti() {
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff']
-    });
-}
-
-//card animation to make it look nice, we want people to have dopamine rush
-function createCardElement(card, isHidden = false) {
-    let cardImg = document.createElement("img");
-    cardImg.src = "./cards/" + (isHidden ? "BACK.png" : card + ".png");
-    cardImg.className = "playing-card";
-    if (!isHidden) {
-        cardImg.style.animation = "flipInY 0.5s ease-out forwards";
-    }
-    return cardImg;
-}
-//commenting out redundent code to see if it helps
 window.onload = function() {
-    //document.getElementById("place-bet").addEventListener("click", placeBet);
-    //document.getElementById("new-round").addEventListener("click", newRound);
+    document.getElementById("place-bet").addEventListener("click", placeBet);
+    document.getElementById("new-round").addEventListener("click", newRound);
 }
 
 function placeBet() {
@@ -140,8 +93,6 @@ function startGame() {
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";
-        cardImg.className = "playing-card";
-        cardImg.style.animation = "flipInY 0.5s ease-out forwards";
         dealerSum += getValue(card);
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
@@ -151,14 +102,9 @@ function startGame() {
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";
-        cardImg.className = "playing-card";
-        cardImg.style.animation = "flipInY 0.5s ease-out forwards";
         yourSum += getValue(card);
         yourAceCount += checkAce(card);
         document.getElementById("your-cards").append(cardImg);
-        
-        // Debugging
-        console.log("Dealt player card:", card, "at path:", cardImg.src);
     }
 
     document.getElementById("hit").addEventListener("click", hit);
@@ -173,13 +119,9 @@ function hit() {
     let cardImg = document.createElement("img");
     let card = deck.pop();
     cardImg.src = "./cards/" + card + ".png";
-    cardImg.className = "playing-card";
-    cardImg.style.animation = "flipInY 0.5s ease-out forwards";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
-    
-    console.log("Hit card:", card, "at path:", cardImg.src);
 
     if (reduceAce(yourSum, yourAceCount) > 21) {
         canHit = false;
@@ -201,23 +143,19 @@ function stay() {
     if (yourSum > 21) {
         message = "You Bust! Lose $" + currentBet;
     }
-        //also triggers confetti because you WIN
     else if (dealerSum > 21) {
         winnings = currentBet * 2;
         bank += winnings;
         message = "Dealer Busts! You win $" + winnings;
-        triggerConfetti();
     }
     else if (yourSum == dealerSum) {
         bank += currentBet;
         message = "Tie! You get your $" + currentBet + " back";
     }
-    //this else if statment triggers confetti now that when you win for extra dopamine
     else if (yourSum > dealerSum) {
         winnings = currentBet * 2;
         bank += winnings;
         message = "You Win $" + winnings + "!";
-        triggerConfetti();
     }
     else if (yourSum < dealerSum) {
         message = "You Lose $" + currentBet;
@@ -257,3 +195,49 @@ function reduceAce(playerSum, playerAceCount) {
     }
     return playerSum;
 }
+let currentUser = null;
+
+window.onload = function() {
+    document.getElementById("login-btn").addEventListener("click", loginUser);
+    document.getElementById("place-bet").addEventListener("click", placeBet);
+    document.getElementById("new-round").addEventListener("click", newRound);
+};
+
+function loginUser() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!username || !password) {
+        alert("Enter both username and password.");
+        return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("blackjack_users") || "{}");
+
+    if (!users[username]) {
+        // New user signup
+        users[username] = { password: password, bank: 1000 };
+        localStorage.setItem("blackjack_users", JSON.stringify(users));
+        alert("Account created! Logged in.");
+    } else if (users[username].password !== password) {
+        alert("Incorrect password.");
+        return;
+    }
+
+    currentUser = username;
+    bank = users[username].bank;
+    updateBank();
+
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("game-container").style.display = "block";
+}
+
+function updateBank() {
+    document.getElementById("bank").innerText = bank;
+    if (currentUser) {
+        const users = JSON.parse(localStorage.getItem("blackjack_users"));
+        users[currentUser].bank = bank;
+        localStorage.setItem("blackjack_users", JSON.stringify(users));
+    }
+}
+

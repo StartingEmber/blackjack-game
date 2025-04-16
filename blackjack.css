@@ -92,18 +92,6 @@ body {
     gap: 10px;
 }
 
-.playing-card {
-    height: 150px;
-    width: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
-}
-
-.playing-card:hover {
-    transform: translateY(-5px);
-}
-
 #dealer-cards img:not(#hidden), #your-cards img {
     animation: dealCard 0.5s ease-out;
 }

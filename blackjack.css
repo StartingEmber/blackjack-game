@@ -101,6 +101,15 @@ button:hover {
     text-shadow: 0 0 10px #ff0, 0 0 20px #f80;
     font-family: 'Impact', sans-serif;
     margin-bottom: 30px;
+
+    /* OUTLINE */
+    -webkit-text-stroke: 1.5px black;
+
+    /* GLOW + SHADOW */
+    text-shadow:
+        0 0 5px #f80,
+        0 0 10px rgba(0, 0, 0, 0.8),
+        2px 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .flicker {

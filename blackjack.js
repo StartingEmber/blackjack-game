@@ -119,6 +119,27 @@ function startGame() {
         yourAceCount += checkAce(card);
         document.getElementById("your-cards").append(cardImg);
     }
+    //Added blackjack feature *you get dealt a 21 without having to do shit*
+    //START OF NEW CODE
+    if (yourSum == 21) {
+        canHit = false;
+        document.getElementById("hit").disabled = true;
+        document.getElementById("stay").disabled = true;
+
+        // Reveal the dealer's hidden card
+        document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+
+        //Calculate blackjack payout
+        let blackjackWinnings = currentBet * 1.5;
+        bank += currentBet + blackjackWinnings;
+
+        document.getElementById("results").innerText = "BLACKJACK! You win $" + blackjackWinnings;
+        document.getElementById("dealer-sum").innerText = dealerSum;
+        document.getElementById("your-sum").innerText = yourSum;
+        document.getElementById("new-round").style.display = "inline-block";
+        updateBank();
+        return;
+        //END OF NEW CODE
 
     document.getElementById("hit").addEventListener("click", hit);
     document.getElementById("stay").addEventListener("click", stay);

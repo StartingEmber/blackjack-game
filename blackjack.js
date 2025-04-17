@@ -151,7 +151,7 @@ function stay() {
     document.getElementById("hidden").src = "./cards/" + hidden + ".png";
 
     //Dealer draws until 17 or higher
-    while (dealerSum< 17) { 
+    While (dealerSum < 17) { 
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";

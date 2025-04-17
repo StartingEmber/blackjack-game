@@ -140,7 +140,8 @@ function startGame() {
         updateBank();
         return;
         //END OF NEW CODE
-
+    }
+    
     document.getElementById("hit").addEventListener("click", hit);
     document.getElementById("stay").addEventListener("click", stay);
 }

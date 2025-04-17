@@ -76,7 +76,7 @@ function buildDeck() {
 }
 
 function shuffleDeck() {
-    for (let i = 0; i < deck.length; i++) {
+    for (let i = 0; i < deck.length; i++) {F
         let j = Math.floor(Math.random() * deck.length);
         let temp = deck[i];
         deck[i] = deck[j];
@@ -145,13 +145,13 @@ function hit() {
 }
 
 function stay() {
-    
+
     //LINES 149- 162 IS NEW CODE
     //reveal dealer's hidden card
     document.getElementById("hidden").src = "./cards/" + hidden + ".png";
 
     //Dealer draws until 17 or higher
-    While (dealerSum< 17) { 
+    while (dealerSum< 17) { 
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";
@@ -166,7 +166,8 @@ function stay() {
     yourSum = reduceAce(yourSum, yourAceCount);
 
     canHit = false;
-    document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+    //vvv not needed
+    // document.getElementById("hidden").src = "./cards/" + hidden + ".png";
     document.getElementById("hit").disabled = true;
     document.getElementById("stay").disabled = true;
 

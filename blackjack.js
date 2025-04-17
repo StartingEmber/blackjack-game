@@ -92,7 +92,7 @@ function startGame() {
     // Moved the whole to the 'stay' function
     // We want to see the dealer's other cards AFTER player stays
     // but left code inside loop because we wanna see one card
-    
+    /*
     while (dealerSum < 17) {
         let cardImg = document.createElement("img");
         let card = deck.pop();
@@ -101,17 +101,17 @@ function startGame() {
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
     }
-    
+    */
 
     // vvv code without loop
-    /*
+    
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";
         dealerSum += getValue(card);
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
-        */
+        
 
     //deal cards to player
     for (let i = 0; i < 2; i++) {
@@ -145,13 +145,13 @@ function hit() {
 }
 
 function stay() {
-    /*
-    //LINES 146 - 158 IS NEW CODE
+    
+    //LINES 149- 162 IS NEW CODE
     //reveal dealer's hidden card
     document.getElementById("hidden").src = "./cards/" + hidden + ".png";
 
     //Dealer draws until 17 or higher
-    While (reduceAce(dealerSum, dealerAceCount) < 17) {
+    While (dealerSum< 17) { 
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";
@@ -160,7 +160,7 @@ function stay() {
         document.getElementById("dealer-cards").append(cardImg);
     }
     //END OF NEW CODE
-    */
+    
     
     dealerSum = reduceAce(dealerSum, dealerAceCount);
     yourSum = reduceAce(yourSum, yourAceCount);

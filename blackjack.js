@@ -166,8 +166,8 @@ function stay() {
     yourSum = reduceAce(yourSum, yourAceCount);
 
     canHit = false;
-    //vvv not needed
-    // document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+    
+    document.getElementById("hidden").src = "./cards/" + hidden + ".png";
     document.getElementById("hit").disabled = true;
     document.getElementById("stay").disabled = true;
 

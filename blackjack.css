@@ -54,26 +54,44 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background-image: url('./pexels-apasaric-3123832.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    animation: flicker-bg 6s infinite;
+    
 }
-
-
-.casino-bg {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        45deg,
-        #111 0px,
-        #111 10px,
-        #ffcc00 10px,
-        #ffcc00 20px
-    );
-    background-size: 200% 200%;
-    animation: casinoLights 5s linear infinite;
-    opacity: 0.2;
-    z-index: -1;
-    filter: blur(3px);
+@keyframes flicker-bg {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    10% {
+        filter: brightness(0.7);
+    }
+    12% {
+        filter: brightness(1.1);
+    }
+    15% {
+        filter: brightness(0.6);
+    }
+    25% {
+        filter: brightness(1);
+    }
+    35% {
+        filter: brightness(0.8);
+    }
+    50% {
+        filter: brightness(1.05);
+    }
+    65% {
+        filter: brightness(0.9);
+    }
+    80% {
+        filter: brightness(1.02);
+    }
 }
 
 

@@ -88,7 +88,19 @@ function startGame() {
     hidden = deck.pop();
     dealerSum += getValue(hidden);
     dealerAceCount += checkAce(hidden);
+
+    //BEGINNING OF NEW EDIT
+    // Dealer needs to deal themselves only one visible card to the dealer
+        let cardImg = document.createElement("img");
+        let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png";
+        dealerSum += getValue(card);
+        dealerAceCount += checkAce(card);
+        document.getElementById("dealer-cards").append(cardImg);
+    //END OF NEW EDIT
     
+    //Old code
+    /*
     while (dealerSum < 17) {
         let cardImg = document.createElement("img");
         let card = deck.pop();
@@ -97,6 +109,7 @@ function startGame() {
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
     }
+    */
 
     for (let i = 0; i < 2; i++) {
         let cardImg = document.createElement("img");
@@ -129,11 +142,26 @@ function hit() {
 }
 
 function stay() {
+    //START OF NEW CODE
+    //reveal hidden card
+    document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+
+    //dealer draws until 17 or higher
+     while (reduceAce(dealerSum, dealerAceCount) < 17) {
+        let cardImg = document.createElement("img");
+        let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png";
+        dealerSum += getValue(card);
+        dealerAceCount += checkAce(card);
+        document.getElementById("dealer-cards").append(cardImg);
+    }
+    //END OF NEW CODE
     dealerSum = reduceAce(dealerSum, dealerAceCount);
     yourSum = reduceAce(yourSum, yourAceCount);
 
     canHit = false;
-    document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+    //not needed
+    //document.getElementById("hidden").src = "./cards/" + hidden + ".png";
     document.getElementById("hit").disabled = true;
     document.getElementById("stay").disabled = true;
 

@@ -5,6 +5,7 @@ let yourAceCount = 0;
 let hidden;
 let deck;
 let canHit = true;
+let hasHit = false; //used for double down
 let bank = 1000;
 let currentBet = 0;
 
@@ -84,6 +85,28 @@ function shuffleDeck() {
     }
 }
 
+
+//add a double-down feature
+//START OF DOUBLE DOWN
+/*
+function doubleDown() {
+    if (canHit == true && hasHit == false) {
+        let cardImg = document.createElement("img");
+        let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png";
+        yourSum += getValue(card);
+        yourAceCount += checkAce(card);
+        document.getElementById("your-cards").append(cardImg);
+        hasHit == true
+    }
+    else {
+        return;
+    }
+        
+}
+//END OF DOUBLEDOWN FEATURE
+*/
+
 function startGame() {
     hidden = deck.pop();
     dealerSum += getValue(hidden);
@@ -143,6 +166,8 @@ function startGame() {
     }
     
     document.getElementById("hit").addEventListener("click", hit);
+    //DOUBLE DOWN FEATURE
+    //document.getElementById("doubleDown").addEventListener("click", doubleDown);
     document.getElementById("stay").addEventListener("click", stay);
 }
 
@@ -191,8 +216,7 @@ async function stay() {
     yourSum = reduceAce(yourSum, yourAceCount);
 
     canHit = false;
-    //not needed
-    //document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+    
     document.getElementById("hit").disabled = true;
     document.getElementById("stay").disabled = true;
 

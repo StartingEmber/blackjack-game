@@ -171,7 +171,7 @@ function delay(ms) {
 }
 
 
-function stay() {
+async function stay() {
     //START OF NEW CODE
     //reveal hidden card
     document.getElementById("hidden").src = "./cards/" + hidden + ".png";

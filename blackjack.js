@@ -163,6 +163,12 @@ function hit() {
     }
 }
 
+//Adding a 'delay' function to the 'stay' function for when the dealer deals themselves cards
+//Improves comprehension and makes things more smooth
+function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function stay() {
     //START OF NEW CODE
     //reveal hidden card
@@ -170,6 +176,7 @@ function stay() {
 
     //dealer draws until 17 or higher
      while (reduceAce(dealerSum, dealerAceCount) < 17) {
+        await delay(500); //PART ADDED FOR DELAY FUNCTION
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";

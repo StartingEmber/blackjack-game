@@ -165,11 +165,11 @@ function hit() {
 
 //Adding a 'delay' function to the 'stay' function for when the dealer deals themselves cards
 //Improves comprehension and makes things more smooth
-/*
+
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-*/
+
 
 function stay() {
     //START OF NEW CODE

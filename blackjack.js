@@ -178,7 +178,7 @@ async function stay() {
 
     //dealer draws until 17 or higher
      while (reduceAce(dealerSum, dealerAceCount) < 17) {
-        await delay(500); //PART ADDED FOR DELAY FUNCTION
+        await delay(725); //PART ADDED FOR DELAY FUNCTION
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";

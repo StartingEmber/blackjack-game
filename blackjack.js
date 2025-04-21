@@ -56,7 +56,7 @@ function newRound() {
     document.getElementById("hit").disabled = false;
     document.getElementById("stay").disabled = false;
     //Added double down
-    document.getElementById("double-down").disabled = false;
+    //document.getElementById("double-down").disabled = false;
     hasHit = false;
 
     
@@ -179,9 +179,6 @@ function hit() {
     if (!canHit) {
         return;
     }
-    //double down
-    hasHit = true;
-    document.getElementById("double-down").disabled = true;
 
     let cardImg = document.createElement("img");
     let card = deck.pop();
@@ -320,41 +317,4 @@ function loginUser() {
 
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("game-container").style.display = "block";
-}
-
-function updateBank() {
-    document.getElementById("bank").innerText = bank;
-    if (currentUser) {
-        const users = JSON.parse(localStorage.getItem("blackjack_users"));
-        users[currentUser].bank = bank;
-        localStorage.setItem("blackjack_users", JSON.stringify(users));
-    }
-}
-function doubleDown() {
-    if (!canHit || hasHit) return;
-
-    if (bank < currentBet) {
-        alert("Not enough money to double down!");
-        return;
-    }
-
-    // Deduct and double the bet
-    bank -= currentBet;
-    currentBet *= 2;
-    updateBank();
-
-    // Mark as used
-    hasHit = true;
-
-    // One card
-    hit();
-
-    // Disable further action
-    canHit = false;
-    document.getElementById("hit").disabled = true;
-    document.getElementById("stay").disabled = true;
-    document.getElementById("double-down").disabled = true;
-
-    // Auto stay after short delay
-    setTimeout(stay, 750);
 }

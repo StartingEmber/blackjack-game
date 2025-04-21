@@ -9,48 +9,25 @@ let hasHit = false; //used for double down
 let bank = 1000;
 let currentBet = 0;
 
-window.onload = function () {
-    document.getElementById("place-bet").addEventListener("click", () => {
-        placeBet();
-        startMusic(); // Ensures music starts after interaction
-    });
-
-    document.getElementById("new-round").addEventListener("click", newRound);
-
-    const music = document.getElementById("bg-music");
-    const musicToggle = document.getElementById("music-toggle");
-    const volumeControl = document.getElementById("volume-control");
-
-    // Default volume
-    music.volume = 0.5;
-
-    // Toggle music on/off
-    musicToggle.addEventListener("change", () => {
-        if (musicToggle.checked) {
-            music.muted = false;
-            music.play().catch(() => {});
-        } else {
-            music.muted = true;
-        }
-    });
-
-    // Adjust volume
-    volumeControl.addEventListener("input", () => {
-        music.volume = volumeControl.value;
-    });
-
-    // Play on user interaction if needed
-    function startMusic() {
-        if (!music.paused && !music.muted) return;
-        music.play().catch((e) => {
-            console.log("Autoplay prevented. Music will start on next interaction.");
-        });
-    }
-
-    // Allow any click to try and start music
-    document.body.addEventListener("click", startMusic, { once: true });
-};
-}
+window.onload = function() {
+     document.getElementById("place-bet").addEventListener("click", placeBet);
+     document.getElementById("new-round").addEventListener("click", newRound);
+ 
+     const music = document.getElementById("bg-music");
+     const musicToggle = document.getElementById("music-toggle");
+     const volumeControl = document.getElementById("volume-control");
+ 
+     music.volume = 0.5;
+ 
+     musicToggle.addEventListener("change", () => {
+     music.muted = !musicToggle.checked;
+ });
+ 
+     volumeControl.addEventListener("input", () => {
+     music.volume = volumeControl.value;
+ });
+ 
+ }
 
 function placeBet() {
     currentBet = parseInt(document.getElementById("bet-amount").value);

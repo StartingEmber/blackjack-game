@@ -334,6 +334,8 @@ function loginUser() {
 
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("game-container").style.display = "block";
+    document.getElementById("betting-section").style.display = "block";
+    document.getElementById("game-section").style.display = "none";
 }
 
 function updateBank() {

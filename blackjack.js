@@ -10,40 +10,10 @@ let bank = 1000;
 let currentBet = 0;
 
 window.onload = function() {
-     document.getElementById("place-bet").addEventListener("click", () => {
-        placeBet();
-    });
-
+    document.getElementById("place-bet").addEventListener("click", placeBet);
     document.getElementById("new-round").addEventListener("click", newRound);
- 
-     const music = document.getElementById("bg-music");
-     const musicToggle = document.getElementById("music-toggle");
-     const volumeControl = document.getElementById("volume-control");
- 
-     music.volume = 0.5;
- 
-     // Try to autoplay
-    music.play().catch(() => {
-        console.log("Music autoplay blocked. Will start on user interaction.");
-    });
+}
 
-    // Enable starting music on interaction (if blocked)
-    document.body.addEventListener("click", () => {
-        if (!music.paused && !music.muted) return;
-        music.play().catch(() => {});
-    }, { once: true });
-
-    // Toggle mute
-    musicToggle.addEventListener("change", () => {
-        music.muted = !musicToggle.checked;
-    });
-
-    // Volume adjust
-    volumeControl.addEventListener("input", () => {
-        music.volume = volumeControl.value;
-    });
-};
- 
  }
 
 function placeBet() {

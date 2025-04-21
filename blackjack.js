@@ -10,8 +10,11 @@ let bank = 1000;
 let currentBet = 0;
 
 window.onload = function() {
-     document.getElementById("place-bet").addEventListener("click", placeBet);
-     document.getElementById("new-round").addEventListener("click", newRound);
+     document.getElementById("place-bet").addEventListener("click", () => {
+        placeBet();
+    });
+
+    document.getElementById("new-round").addEventListener("click", newRound);
  
      const music = document.getElementById("bg-music");
      const musicToggle = document.getElementById("music-toggle");

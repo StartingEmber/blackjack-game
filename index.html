@@ -47,6 +47,24 @@
             <p id="results"></p>
             <button id="new-round" style="display: none;">New Round</button>
         </div>
+        <div id="settings-bar">
+            <h3>Settings</h3>
+            <label>
+                🎵 Music:
+                <input type="checkbox" id="music-toggle" checked>
+            </label>
+            <br>
+            <label>
+                🔊 Volume:
+                <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.5">
+            </label>
+
+            <audio id="bg-music" loop autoplay>
+                <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_74e3f34508.mp3?filename=casino-11154.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
     </body>
 </html>
 

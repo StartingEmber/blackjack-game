@@ -255,18 +255,14 @@ async function stay() {
 }
 
 function quitToMenu() {
-    // Hide game and menu sections
-    document.getElementById("game-section").style.display = "none";
-    document.getElementById("betting-section").style.display = "none";
-
-    // Show the login screen again
-    document.getElementById("login-screen").style.display = "block";
+    // Hide everything except login screen
     document.getElementById("game-container").style.display = "none";
+    document.getElementById("login-screen").style.display = "block";
 
-    // Clear player session
+    // Clear session
     currentUser = null;
 
-    // Reset table visuals
+    // Reset gameplay visuals (optional but clean)
     document.getElementById("dealer-cards").innerHTML = '<img id="hidden" src="./cards/BACK.png">';
     document.getElementById("your-cards").innerHTML = '';
     document.getElementById("results").innerText = '';
@@ -276,6 +272,7 @@ function quitToMenu() {
     document.getElementById("hit").disabled = false;
     document.getElementById("stay").disabled = false;
 }
+
 
 
 function getValue(card) {

@@ -55,10 +55,6 @@ function newRound() {
     
     document.getElementById("hit").disabled = false;
     document.getElementById("stay").disabled = false;
-    //Added double down
-    document.getElementById("double-down").disabled = false;
-    hasHit = false;
-
     
     document.getElementById("betting-section").style.display = "block";
     document.getElementById("game-section").style.display = "none";
@@ -171,10 +167,8 @@ function startGame() {
     
     document.getElementById("hit").addEventListener("click", hit);
     //DOUBLE DOWN FEATURE
-    document.getElementById("doubleDown").addEventListener("click", doubleDown);
+    //document.getElementById("doubleDown").addEventListener("click", doubleDown);
     document.getElementById("stay").addEventListener("click", stay);
-
-    document.getElementById("doubleDown").disabled = false;
 }
 
 function hit() {
@@ -257,34 +251,6 @@ async function stay() {
     document.getElementById("new-round").style.display = "inline-block";
 }
 
-function doubleDown() {
-    if (!canHit || hasHit || bank < currentBet) return;
-
-    // Double the bet and deduct from bank
-    bank -= currentBet;
-    currentBet *= 2;
-    updateBank();
-
-    // Draw one card
-    let cardImg = document.createElement("img");
-    let card = deck.pop();
-    cardImg.src = "./cards/" + card + ".png";
-    yourSum += getValue(card);
-    yourAceCount += checkAce(card);
-    document.getElementById("your-cards").append(cardImg);
-
-    canHit = false;
-    hasHit = true;
-
-    // Disable all action buttons
-    document.getElementById("hit").disabled = true;
-    document.getElementById("stay").disabled = true;
-    document.getElementById("doubleDown").disabled = true;
-
-    // Auto end turn
-    stay();
-}
-
 function getValue(card) {
     let data = card.split("-");
     let value = data[0];
@@ -347,4 +313,13 @@ function loginUser() {
 
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("game-container").style.display = "block";
+}
+
+function updateBank() {
+    document.getElementById("bank").innerText = bank;
+    if (currentUser) {
+        const users = JSON.parse(localStorage.getItem("blackjack_users"));
+        users[currentUser].bank = bank;
+        localStorage.setItem("blackjack_users", JSON.stringify(users));
+    }
 }

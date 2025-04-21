@@ -14,8 +14,6 @@ window.onload = function() {
     document.getElementById("new-round").addEventListener("click", newRound);
 }
 
- }
-
 function placeBet() {
     currentBet = parseInt(document.getElementById("bet-amount").value);
     

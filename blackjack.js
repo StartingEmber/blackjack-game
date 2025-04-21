@@ -255,9 +255,16 @@ async function stay() {
 }
 
 function quitToMenu() {
-    // Hide game and show menu
+    // Hide game and menu sections
     document.getElementById("game-section").style.display = "none";
-    document.getElementById("betting-section").style.display = "block";
+    document.getElementById("betting-section").style.display = "none";
+
+    // Show the login screen again
+    document.getElementById("login-screen").style.display = "block";
+    document.getElementById("game-container").style.display = "none";
+
+    // Clear player session
+    currentUser = null;
 
     // Reset table visuals
     document.getElementById("dealer-cards").innerHTML = '<img id="hidden" src="./cards/BACK.png">';

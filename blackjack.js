@@ -12,6 +12,21 @@ let currentBet = 0;
 window.onload = function() {
     document.getElementById("place-bet").addEventListener("click", placeBet);
     document.getElementById("new-round").addEventListener("click", newRound);
+
+    const music = document.getElementById("bg-music");
+    const musicToggle = document.getElementById("music-toggle");
+    const volumeControl = document.getElementById("volume-control");
+
+    music.volume = 0.5;
+
+    musicToggle.addEventListener("change", () => {
+    music.muted = !musicToggle.checked;
+});
+
+    volumeControl.addEventListener("input", () => {
+    music.volume = volumeControl.value;
+});
+
 }
 
 function placeBet() {

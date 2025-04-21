@@ -9,24 +9,47 @@ let hasHit = false; //used for double down
 let bank = 1000;
 let currentBet = 0;
 
-window.onload = function() {
-    document.getElementById("place-bet").addEventListener("click", placeBet);
+window.onload = function () {
+    document.getElementById("place-bet").addEventListener("click", () => {
+        placeBet();
+        startMusic(); // Ensures music starts after interaction
+    });
+
     document.getElementById("new-round").addEventListener("click", newRound);
 
     const music = document.getElementById("bg-music");
     const musicToggle = document.getElementById("music-toggle");
     const volumeControl = document.getElementById("volume-control");
 
+    // Default volume
     music.volume = 0.5;
 
+    // Toggle music on/off
     musicToggle.addEventListener("change", () => {
-    music.muted = !musicToggle.checked;
-});
+        if (musicToggle.checked) {
+            music.muted = false;
+            music.play().catch(() => {});
+        } else {
+            music.muted = true;
+        }
+    });
 
+    // Adjust volume
     volumeControl.addEventListener("input", () => {
-    music.volume = volumeControl.value;
-});
+        music.volume = volumeControl.value;
+    });
 
+    // Play on user interaction if needed
+    function startMusic() {
+        if (!music.paused && !music.muted) return;
+        music.play().catch((e) => {
+            console.log("Autoplay prevented. Music will start on next interaction.");
+        });
+    }
+
+    // Allow any click to try and start music
+    document.body.addEventListener("click", startMusic, { once: true });
+};
 }
 
 function placeBet() {

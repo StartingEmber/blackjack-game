@@ -9,10 +9,13 @@ let hasHit = false; //used for double down
 let bank = 1000;
 let currentBet = 0;
 
-window.onload = function() {
+window.onload = function () {
+    document.getElementById("login-btn").addEventListener("click", loginUser);
     document.getElementById("place-bet").addEventListener("click", placeBet);
     document.getElementById("new-round").addEventListener("click", newRound);
-}
+    document.getElementById("quit").addEventListener("click", quitToMenu); 
+};
+
 
 function placeBet() {
     currentBet = parseInt(document.getElementById("bet-amount").value);
@@ -251,6 +254,23 @@ async function stay() {
     document.getElementById("new-round").style.display = "inline-block";
 }
 
+function quitToMenu() {
+    // Hide game and show menu
+    document.getElementById("game-section").style.display = "none";
+    document.getElementById("betting-section").style.display = "block";
+
+    // Reset table visuals
+    document.getElementById("dealer-cards").innerHTML = '<img id="hidden" src="./cards/BACK.png">';
+    document.getElementById("your-cards").innerHTML = '';
+    document.getElementById("results").innerText = '';
+    document.getElementById("dealer-sum").innerText = '';
+    document.getElementById("your-sum").innerText = '';
+    document.getElementById("new-round").style.display = "none";
+    document.getElementById("hit").disabled = false;
+    document.getElementById("stay").disabled = false;
+}
+
+
 function getValue(card) {
     let data = card.split("-");
     let value = data[0];
@@ -279,12 +299,6 @@ function reduceAce(playerSum, playerAceCount) {
     return playerSum;
 }
 let currentUser = null;
-
-window.onload = function() {
-    document.getElementById("login-btn").addEventListener("click", loginUser);
-    document.getElementById("place-bet").addEventListener("click", placeBet);
-    document.getElementById("new-round").addEventListener("click", newRound);
-};
 
 function loginUser() {
     const username = document.getElementById("username").value.trim();

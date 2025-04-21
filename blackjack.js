@@ -19,13 +19,27 @@ window.onload = function() {
  
      music.volume = 0.5;
  
-     musicToggle.addEventListener("change", () => {
-     music.muted = !musicToggle.checked;
- });
- 
-     volumeControl.addEventListener("input", () => {
-     music.volume = volumeControl.value;
- });
+     // Try to autoplay
+    music.play().catch(() => {
+        console.log("Music autoplay blocked. Will start on user interaction.");
+    });
+
+    // Enable starting music on interaction (if blocked)
+    document.body.addEventListener("click", () => {
+        if (!music.paused && !music.muted) return;
+        music.play().catch(() => {});
+    }, { once: true });
+
+    // Toggle mute
+    musicToggle.addEventListener("change", () => {
+        music.muted = !musicToggle.checked;
+    });
+
+    // Volume adjust
+    volumeControl.addEventListener("input", () => {
+        music.volume = volumeControl.value;
+    });
+};
  
  }
 

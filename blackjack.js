@@ -56,7 +56,7 @@ function newRound() {
     document.getElementById("hit").disabled = false;
     document.getElementById("stay").disabled = false;
     //Added double down
-    //document.getElementById("double-down").disabled = false;
+    document.getElementById("double-down").disabled = false;
     hasHit = false;
 
     
@@ -173,6 +173,8 @@ function startGame() {
     //DOUBLE DOWN FEATURE
     document.getElementById("doubleDown").addEventListener("click", doubleDown);
     document.getElementById("stay").addEventListener("click", stay);
+
+    document.getElementById("doubleDown").disabled = false;
 }
 
 function hit() {
@@ -253,6 +255,34 @@ async function stay() {
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("results").innerText = message;
     document.getElementById("new-round").style.display = "inline-block";
+}
+
+function doubleDown() {
+    if (!canHit || hasHit || bank < currentBet) return;
+
+    // Double the bet and deduct from bank
+    bank -= currentBet;
+    currentBet *= 2;
+    updateBank();
+
+    // Draw one card
+    let cardImg = document.createElement("img");
+    let card = deck.pop();
+    cardImg.src = "./cards/" + card + ".png";
+    yourSum += getValue(card);
+    yourAceCount += checkAce(card);
+    document.getElementById("your-cards").append(cardImg);
+
+    canHit = false;
+    hasHit = true;
+
+    // Disable all action buttons
+    document.getElementById("hit").disabled = true;
+    document.getElementById("stay").disabled = true;
+    document.getElementById("doubleDown").disabled = true;
+
+    // Auto end turn
+    stay();
 }
 
 function getValue(card) {

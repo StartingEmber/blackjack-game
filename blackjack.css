@@ -150,24 +150,14 @@ button:hover {
     background-color: #27ae60;
     box-shadow: 0 0 15px #27ae60, 0 0 30px #27ae60;
 }
-#settings-bar {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(44, 62, 80, 0.95);
-    padding: 15px;
-    border-radius: 10px;
-    color: #ecf0f1;
-    font-size: 16px;
-    text-align: left;
-    z-index: 1000;
-}
-
-#settings-bar h3 {
-    margin: 0 0 10px 0;
-}
-
-#settings-bar label {
-    display: block;
-    margin: 5px 0;
+#music-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  z-index: 1000;
 }

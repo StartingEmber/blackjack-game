@@ -14,7 +14,31 @@ window.onload = function () {
     document.getElementById("place-bet").addEventListener("click", placeBet);
     document.getElementById("new-round").addEventListener("click", newRound);
     document.getElementById("quit").addEventListener("click", quitToMenu); 
-};
+
+    const music = document.getElementById("bg-music");
+    const musicToggle = document.getElementById("music-toggle");
+    const volumeControl = document.getElementById("volume-control");
+
+    // Set default volume
+    music.volume = 0.5;
+
+    // Play music after first interaction (to satisfy browser)
+    document.body.addEventListener("click", () => {
+      if (music.paused && !music.muted) {
+    music.play().catch(() => console.log("Autoplay blocked"));
+      }
+    }, { once: true });
+
+    // Toggle mute
+    musicToggle.addEventListener("change", () => {
+      music.muted = !musicToggle.checked;
+    });
+
+    // Volume control
+    volumeControl.addEventListener("input", () => {
+      music.volume = volumeControl.value;
+    }); 
+}
 
 
 function placeBet() {
